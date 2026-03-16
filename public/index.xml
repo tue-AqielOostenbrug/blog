@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog</title>
-    <link>https://example.org/</link>
-    <description>Recent content on Blog</description>
+    <title>Terminal</title>
+    <link>//localhost:1313/</link>
+    <description>Recent content on Terminal</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Mar 2026 16:10:46 +0100</lastBuildDate>
-    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Mar 2026 10:56:48 +0100</lastBuildDate>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Draft: Honoring the IRC Protocol and C-ing it through</title>
+      <link>//localhost:1313/posts/honors/</link>
+      <pubDate>Mon, 16 Mar 2026 10:56:48 +0100</pubDate>
+      <guid>//localhost:1313/posts/honors/</guid>
+      <description>&lt;p&gt;At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&amp;hellip; a Honors project.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My First Post</title>
-      <link>https://example.org/posts/my-first-post/</link>
+      <link>//localhost:1313/posts/my-first-post/</link>
       <pubDate>Wed, 11 Mar 2026 16:10:46 +0100</pubDate>
-      <guid>https://example.org/posts/my-first-post/</guid>
+      <guid>//localhost:1313/posts/my-first-post/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;&#xA;&lt;p&gt;Visit the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website!&lt;/p&gt;</description>
     </item>
   </channel>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Draft: Honoring the IRC Protocol and C-ing it through :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&hellip; a Honors project.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/honors/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a0773cce9310cb6d8ed23e50f005448facf29a53001b57e038828daa466b25c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Draft: Honoring the IRC Protocol and C-ing it through">
+<meta property="og:description" content="At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&hellip; a Honors project.
+" />
+<meta property="og:url" content="//localhost:1313/posts/honors/" />
+<meta property="og:site_name" content="Terminal" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2026-03-16 10:56:48 &#43;0100 CET" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/showcase" >Showcase</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/honors/">Draft: Honoring the IRC Protocol and C-ing it through</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2026-03-16</time></div>
+
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-project">The project</a></li>
+    <li><a href="#setting-up-the-server">Setting up the server</a></li>
+    <li><a href="#testing-the-protocol">Testing the protocol</a>
+      <ul>
+        <li><a href="#learning-commands">Learning commands</a></li>
+        <li><a href="#testing-commands">Testing commands</a></li>
+      </ul>
+    </li>
+    <li><a href="#relearning-to-program-in-c">Relearning to program in C</a></li>
+    <li><a href="#irc-sockets">IRC sockets</a>
+      <ul>
+        <li><a href="#using-c">Using C</a></li>
+      </ul>
+    </li>
+    <li><a href="#parsing-responses">Parsing responses</a></li>
+    <li><a href="#adding-proper-interfaces">Adding proper interfaces</a></li>
+    <li><a href="#setting-up-a-testing-pipeline">Setting up a testing pipeline</a></li>
+    <li><a href="#switching-to-the-esp32">Switching to the ESP32</a></li>
+    <li><a href="#making-a-gui">Making a GUI</a></li>
+    <li><a href="#fixing-the-orientation">Fixing the orientation</a></li>
+    <li><a href="#putting-it-all-together">Putting it all together</a></li>
+    <li><a href="#wrap-up">Wrap-up</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&hellip; a Honors project.</p>
+<h2 id="the-project">The project<a href="#the-project" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To become a proper wizard, I simply felt like I mostly needed more practical experience. No more curriculum, no more constraints, just pure experience. To become a better embedded systems engineer, I decided to get as close to the problem as possible. So I decided to really, really, learn how to program an embeded system in C. Some of the courses I followed already got pretty close to my problem and even increased my curiosity further. The closest of which was Parallelization, compilers and platforms by Roel Jordans. So I asked for his supervision, which he luckily agreed with. Now I just needed a concrete-ish plan. So eventually, I came up with the following learning objectives to <strong>become a better embedded engineer</strong>:</p>
+<ul>
+<li>Become a better C programmer</li>
+<li>Produce a complete embedded product so I can also apply this to industry (design, build, eval, doc, and all)</li>
+<li>Stay organized (stay Agile, but not covered here?)</li>
+<li><del>Destroy Isildur&rsquo;s Bane</del></li>
+</ul>
+<p>An old goody for many new developers is to write a HTTP webserver but I had different plans&hellip; During the bachelor there was course called Computer Networks and Security by Tanir Ozcelebi. While writing a paper on QUIC, I remember reading about an old chat protocol. A little something called IRC. As a gen-z zoomer this felt like magic from a long forgotten era which I definitely needed to learn someday. And today was that day (I guess). So for my first main objective I decided to tackle IRC. And to go through the whole pipeline I decided to first develop a client for Linux and then port that onto an embedded system. Specifically, an ESP32 after discussing it viability in industry with my supervisor. Moreso, to add some interesting inputs and actuation, I decided to go with the <a href="https://www.tinytronics.nl/nl/development-boards/microcontroller-boards/met-wi-fi/jingcai-esp32-2432s028r-2.8-inch-tft-lcd-display-320*240-pixels-met-resistief-touchscreen-esp32">ESP32-2432S028R</a> because added additional interesting inputs (touchscreen) and actuation (LCD display) to my project and I was inspired to potentially further develop my project into a multi medium communicaiton device somewhat like the <a href="https://github.com/justcallmekoko/ESP32Marauder">ESP32 Marauder project</a> by justcallmekoko.</p>
+<h2 id="setting-up-the-server">Setting up the server<a href="#setting-up-the-server" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To develop a client for the IRC protocol it was necessary to deploy a IRC server. For IRC servers the most popular options are <a href="https://www.unrealircd.org/">UnrealIRCd</a> and <a href="https://www.inspircd.org/">InspIRCd</a>. I tried running both but the first one I eventually ended up getting to work is the UnrealIRCd server. Still, I must say this wasn&rsquo;t as easy as I was expecting. Following the tutorial on their website was quite doable expect for changing the config file. However, using this Youtube video I eventually managed to set it up properly.</p>
+<p>Given the setup experience wasn&rsquo;t that nice for me. I decided to make a dDocker file that could set i up for future development of my tools. This resulted in <a href="...">Dockerfile</a> which I ended up writing with support of ChatGPT and the Docker docuemntation to get the sed part working correctly and use the correct terms for the install section so you don&rsquo;t have to rebuild all the required packages when rebulding the server.</p>
+<p>Still, some notable issues with the server are that when logging off, the used nickname will stay unusable for longer than expected. As such, logging off and on requires the user to wait or use a different nickname.</p>
+<h2 id="testing-the-protocol">Testing the protocol<a href="#testing-the-protocol" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To develop a client for the IRC protocol, I first tried to familiarize myself with the general process and most important commands. i</p>
+<h3 id="learning-commands">Learning commands<a href="#learning-commands" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>IRC actually has hundreds of commands and parameter pecularities (see <a href="ircdocs.horse">ircdocs.horse</a>). Luckily, for my simple client, there were only three stages that I felt I needed to concern myself with: Authentication, channel navigation, and communication.</p>
+<p>For authentication, I decided to use the following commands to login:</p>
+<ul>
+<li><code>PASS &lt;password&gt;</code>: Submits your password to the server</li>
+<li><code>NICK &lt;nickname&gt;</code>: Submits your nickname to the server</li>
+<li><code>USER &lt;username&gt; 0 * :&lt;realname&gt;</code>: Submits your username and realname to the server</li>
+</ul>
+<p>It is important that this stage happens first after connecting to the server. If not, the client will not be serviced and won&rsquo;t even be allowed to authenticat if the time-out is reached. Note that password is not always essential as many servers allow clients to connect without full authentication.</p>
+<p>For navigation, I decided to restrict myself to the following three commands:</p>
+<ul>
+<li><code>JOIN &lt;channel&gt;</code>: this allows you to join a channel (kind of like a groupchat with a specific name in the server)</li>
+<li><code>LIST</code>: show you a list of all available channels on the server</li>
+<li><code>PART &lt;channel&gt;</code>: removes you from the specified channel</li>
+</ul>
+<p>Then finally, for communication, I only focussed on one command:</p>
+<ul>
+<li><code>PRIVMSG &lt;target&gt; &lt;msg&gt;</code>: Sends a msg to the target ( channel or nickname) you specified.</li>
+</ul>
+<h3 id="testing-commands">Testing commands<a href="#testing-commands" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>Now that I learned some important IRC commands, I needed to test them. The easiest way to experience the IRC protocol without a full client is to connect to an IRC server using <code>telnet</code> or <code>netcat</code>.</p>
+<p>On Arch you can install <code>telnet</code> by running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -Sy inetutils
+</span></span></code></pre></div><p>Then you can connect to the server using:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">telnet &lt;server address&gt; &lt;port&gt;
+</span></span></code></pre></div><p>Then you can simply write the commands in the terminal and press enter to send the commands to the server.
+However, please note that <code>telnet</code> is not practical to use for real IRC communication because it does not support TLS encryption. This allows malicious actors to read and  modify the content of any message that you or the server send if they can manage to position themselves between the client and the server.</p>
+<p>Alternatively, you can use netcat. Installing <code>netcat</code> on Arch goes as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -Sy openbsd-netcat
+</span></span></code></pre></div><p><strong>Please note that the <code>openbsd-netcat</code> package has been flagged as out of date as of 08-03-2026.</strong>
+Connecting to the server using <code>netcat</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc &lt;server address&gt; &lt;port&gt;
+</span></span></code></pre></div><p>You need to watch out since netcat only sends <code>\n</code> by default. As such, you need to add <code>\r</code> for some servers to function properly because the IRC protocol specifies that all lines should be ended with  a <code>\r\n</code> and old servers mainly still need this constraint to hold to parse properly.</p>
+<h2 id="relearning-to-program-in-c">Relearning to program in C<a href="#relearning-to-program-in-c" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The next big step was to implement this IRC conversation. However, my knowledge of C was quite lacking. Although I had programmed in C before, for example for both Operating Systems and Parallelization Compilers and Platforms, I was still having a hard time because the environment wasn&rsquo;t as constrained as before. Hence, I decided to also follow the C Programming homologation course provided by TU/e while doing this project. But even after all of that I was having trouble with the socket communication. Hence, I returned to the basics, &ldquo;The C programming language&rdquo; by Brain W. Kernighan and Dennis M. Rithchie. Additionally, my supervisor also let me borrow &ldquo;Linux Programming het complete handboek&rdquo; by John Goerzen which also helped me tremoundously. Then after some tips from my supervisor on the advanced usage of man pages and after shredding my OOP biases by watching a lecture on Return Oriented Programming (can&rsquo;t find it right now). Return Oriented Programming (&hellip; was especially helpful), I was finally getting the hang of it.</p>
+<h2 id="irc-sockets">IRC sockets<a href="#irc-sockets" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Now that I felt like I was back in the game, I could finally properly tackle the IRC socket communication in C. Eventually, after a good amount of reading and trial and error, I ended up with the following snippet:</p>
+<h3 id="using-c">Using C<a href="#using-c" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">...</span>
+</span></span></code></pre></div><p>While working on the snippet I after found myself in a situation were the server would ignore my commands. After debugging, this generally seemed to happen because of one of the following two reasons:</p>
+<ol>
+<li>I didn&rsquo;t wait enough between sending commands. This can be resolved by adding a time delay after every <code>write</code></li>
+<li>Commands were not properly parsed by the server. This could be resolved by explicitly adding a <code>\r\n</code> after each command.</li>
+</ol>
+<p>Additionally, I often was rejected by the server because the nickname was already register. This happens because after registering a nickname and then leaving the server it takes a while for the server to realize the user is gone if the user doesn&rsquo;t explicitly notify the server.</p>
+<h2 id="parsing-responses">Parsing responses<a href="#parsing-responses" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ul>
+<li>Mapping idea</li>
+<li>Rejected ideation&hellip; possible perfect hashmap</li>
+</ul>
+<h2 id="adding-proper-interfaces">Adding proper interfaces<a href="#adding-proper-interfaces" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ul>
+<li>Learning to use structs in a embedded environment</li>
+<li>Making use of static to emulate private, unspecified functions</li>
+</ul>
+<h2 id="setting-up-a-testing-pipeline">Setting up a testing pipeline<a href="#setting-up-a-testing-pipeline" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ul>
+<li>cUnit integration with Make</li>
+<li>Writing test cases for the interfaces</li>
+</ul>
+<h2 id="switching-to-the-esp32">Switching to the ESP32<a href="#switching-to-the-esp32" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ul>
+<li>Arduino examples</li>
+<li>Switching from Arduino to C</li>
+<li>Updating the build system</li>
+<li>Using the provided examples</li>
+<li>Finding a working GUI driver</li>
+<li>Returning to the examples</li>
+<li>Fixing the backlight issues</li>
+</ul>
+<h2 id="making-a-gui">Making a GUI<a href="#making-a-gui" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ul>
+<li>Following the examples</li>
+<li>Fixing backlight issues</li>
+<li>Testing the Networking</li>
+<li>Running into issues</li>
+<li>Optimizing performance</li>
+</ul>
+<h2 id="fixing-the-orientation">Fixing the orientation<a href="#fixing-the-orientation" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ul>
+<li>Researching the craft
+After building the GUI, I wanted to make the project a bit easier to use. Currently, with the my ESP in portrait mode it was quite hard to type in credentials or server addresses. Normally, the recalculations or switching to a different orientation can be quite hard since the screen, touchscreen and graphics drivers all would need to be adjusted.</li>
+</ul>
+<h2 id="putting-it-all-together">Putting it all together<a href="#putting-it-all-together" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p><strong>STILL WORKING ON THIS</strong></p>
+<ul>
+<li>Processing feedback</li>
+<li>Refactoring (the hash map and o.g. code combo)</li>
+<li>Making a server that is remotely available</li>
+<li>Printing cases</li>
+<li>Testing the product</li>
+</ul>
+<h2 id="wrap-up">Wrap-up<a href="#wrap-up" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The journey was quite long and although I lost my way a couple of times, all in all it was very fun. I want to thank my supervisor for all the advice and positivity even when I kept swearing about package incompatibility and <a href="https://homepages.inf.ed.ac.uk/rni/papers/realprg.html">the existential dread resulting from not being a Fortran programmer</a>. Finally, I want to thank the reader for bearing with me until the end.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+    
+    
+      <a href="//localhost:1313/posts/my-first-post/" class="button inline next">
+         [<span class="button__text">My First Post</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
