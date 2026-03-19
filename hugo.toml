@@ -68,8 +68,8 @@ pagination.pagerSize = 5
   # set Twitter handles for Twitter cards
   # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
   # do not include @
-  creator = ""
-  site = ""
+  creator = "Aqiel Oostenbrug"
+  site = "https://tue-aqieloostenbrug.github.io/"
 
 [languages]
   [languages.en]
@@ -78,7 +78,7 @@ pagination.pagerSize = 5
 
     [languages.en.params]
       subtitle = "A simple, retro theme for Hugo"
-      owner = ""
+      owner = "Aqiel Oostenbrug"
       keywords = ""
       copyright = ""
       menuMore = "Show more"
@@ -93,7 +93,7 @@ pagination.pagerSize = 5
 
       [languages.en.params.logo]
         logoText = "Terminal"
-        logoHomeLink = "/"
+        logoHomeLink = "/blog/"
 
       [languages.en.menu]
         [[languages.en.menu.main]]
