@@ -1,0 +1,231 @@
++++
+date = '2026-03-16T10:56:48+01:00'
+draft = true
+title = 'Draft: Honoring the IRC Protocol v2'
+toc = true
++++
+At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing... a Honors project.
+
+## Defining the Project  
+<!-- ![You sob](https://en.meming.world/images/en/archive/a/a1/20191211073408%21You_Son_of_a_Bitch%2C_I%E2%80%99m_In_%28Morty%29.jpg "You sob I'm in") -->
+
+To become a proper wizard, I simply felt like I mostly needed more practical experience. No more curriculum, no more constraints, just pure experience. To become a better embedded systems engineer, I decided to get as close to the problem as possible. So I decided to really, really, learn how to program an embeded system in C. Some of the courses I followed already got pretty close to my problem and even increased my curiosity further. The closest of which was Parallelization, compilers and platforms by Roel Jordans. So I asked for his supervision, which he luckily agreed with. Now I just needed a concrete-ish plan. After a lot of brainstorming and some small adjustments here and there, I eventually settled on the following learning objectives **become a better embedded engineer**:
+
+- [x] Become advanced C programmer
+- [x] Produce a complete embedded system, so I apply my knew knowledge to industry (design, build, test and document the system)
+- [x] Stay organized (**not covered in this post**)
+- [ ] ~~fly to Mount Doom~~
+- [ ] ~~Destroy the One Ring~~
+
+The first project many developers undertake when learning a new language is to write a HTTP server. However, I had different plans... During my bachelor in Computer Science and Engineering there was course called [Computer Networks and Security](https://research.tue.nl/en/courses/computer-networks-and-security-3/) given by Tanir Ozcelebi. While writing a paper on the [QUIC protocol](https://en.wikipedia.org/wiki/QUIC), I stumbled across an old chat protocol. A little something called [IRC](https://nl.wikipedia.org/wiki/Internet_Relay_Chat) (Internet Relay Chat). As a gen-z zoomer IRC felt like magic from a long forgotten era that I definitely needed to learn someday and today was that day. So for my first objective I decided to tackle IRC.
+
+Following this line of thought, for the second objective, I decided to go through the entire development pipeline to write a client for IRC. My plan being to first develop a client for Linux and then port my client onto an embedded system.
+
+That being said deciding on an embedded system was not easy. First started by looking at the constraints: the smallest IRC client I found was [sic](https://tools.suckless.org/sic/) from the suckless stack. Written in less than 250 lines of C code, sic is only 5KB. Given an [Atmega328P](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) reportedly has 32KB of flashmemory, it should even be possible to write an IRC client for an Arduino Uno. However, I also wanted to add some kind of input like buttons and a screen. Morover, for the IRC protocal it defintely needed some form of modulation to reach the server and to be useful it needs to become some form of a standalone device. Due to all of these constraints, it would have been hard to complete this project with an Arduino. Hence, I reached out to my supervisor for advice and after thinking it through I decided to work with an ESP32 instead because of the WiFi and Bluetooth capabilities and its popularity in industry. Moreso, after so searching online, I quickly found a ESP32 with a touchscreen which sounded like an interesting addition to this project because of the input and actuation affiliated with the touchscreen. Thusly, I eventually decided to use the [ESP32-2432S028R](https://www.tinytronics.nl/nl/development-boards/microcontroller-boards/met-wi-fi/jingcai-esp32-2432s028r-2.8-inch-tft-lcd-display-320*240-pixels-met-resistief-touchscreen-esp32) which was also partly inspired by the [ESP32 Marauder project](https://github.com/justcallmekoko/ESP32Marauder) by [justcallmekoko](https://github.com/justcallmekoko).
+
+## Setting up the server
+<!-- ![cloud computer](https://tinfoilcipher.co.uk/assets/2021-06-23-the-cloud-isnt-just-someone-elsess-computer/01.jpg "There is no cloud it's just someone else's computer") -->
+
+To develop a client for the IRC protocol it was necessary to deploy a IRC server. For IRC servers the most popular options are [UnrealIRCd](https://www.unrealircd.org/) and [InspIRCd](https://www.inspircd.org/). I tried running both but the first one I eventually ended up getting to work is the UnrealIRCd server. Still, I must say this wasn't as easy as I was expecting. Following the tutorial on their website was quite doable expect for changing the config file. However, using this Youtube video I eventually managed to set it up properly.
+
+Given the setup experience wasn't that nice for me. I decided to make a dDocker file that could set i up for future development of my tools. This resulted in [Dockerfile](...) which I ended up writing with support of ChatGPT and the Docker docuemntation to get the sed part working correctly and use the correct terms for the install section so you don't have to rebuild all the required packages when rebulding the server.
+<!--
+Managed to get UnrealIRCd w
+### Choosing an IRC server
+ 
+- UnrealIRCd
+- InspIRCd
+
+UnrealIRCd
+
+- Setup:
+
+Honestly quite confusing. The [wiki page](https://www.unrealircd.org/docs/Installing_from_source) was good untill the configuration file part. That was really confusing. Moreover, the tutorials were quite vague. Luckily, I eventually managed to get it up and running :).
+
+- Docker time:
+
+Since I managed to set it up locally for testing. I now wanted to make it accessable for everybody following my GitHub repository. However, I did not manage to setup the online repository. Thus, I decided to make my own Dockerfile using the Docker knowledge i acquired from Embedded Visual Control.
+-->
+Still, some notable issues with the server are that when logging off, the used nickname will stay unusable for longer than expected. As such, logging off and on requires the user to wait or use a different nickname. 
+## Testing the protocol
+To develop a client for the IRC protocol, I first tried to familiarize myself with the general process and most important commands. 
+
+<!-- ![I don't know, I just got here](https://pbs.twimg.com/media/E0V4twGVoAEtYJH.jpg "Idk I just got here") -->
+### Learning commands
+IRC actually has hundreds of commands and parameter pecularities (see [ircdocs.horse](ircdocs.horse)). Luckily, for my simple client, there were only three stages that I felt I needed to concern myself with: Authentication, channel navigation, and communication.
+
+For authentication, I decided to use the following commands to login:
+- `PASS <password>`: Submits your password to the server
+- `NICK <nickname>`: Submits your nickname to the server
+- `USER <username> 0 * :<realname>`: Submits your username and realname to the server
+
+It is important that this stage happens first after connecting to the server. If not, the client will not be serviced and won't even be allowed to authenticat if the time-out is reached. Note that password is not always essential as many servers allow clients to connect without full authentication.
+
+For navigation, I decided to restrict myself to the following three commands:
+- `JOIN <channel>`: this allows you to join a channel (kind of like a groupchat with a specific name in the server)
+- `LIST`: show you a list of all available channels on the server
+- `PART <channel>`: removes you from the specified channel
+
+Then finally, for communication, I only focussed on one command:
+- `PRIVMSG <target> <msg>`: Sends a msg to the target ( channel or nickname) you specified.
+### Testing commands
+Now that I learned some important IRC commands, I needed to test them. The easiest way to experience the IRC protocol without a full client is to connect to an IRC server using `telnet` or `netcat`.
+
+On Arch you can install `telnet` by running:
+```bash
+sudo pacman -Sy inetutils
+```
+Then you can connect to the server using:
+```bash
+telnet <server address> <port>
+```
+Then you can simply write the commands in the terminal and press enter to send the commands to the server.
+However, please note that `telnet` is not practical to use for real IRC communication because it does not support TLS encryption. This allows malicious actors to read and  modify the content of any message that you or the server send if they can manage to position themselves between the client and the server.
+
+Alternatively, you can use netcat. Installing `netcat` on Arch goes as follows:
+```bash
+sudo pacman -Sy openbsd-netcat
+```
+**Please note that the `openbsd-netcat` package has been flagged as out of date as of 08-03-2026.**
+Connecting to the server using `netcat`:
+
+```bash
+nc <server address> <port>
+```
+You need to watch out since netcat only sends `\n` by default. As such, you need to add `\r` for some servers to function properly because the IRC protocol specifies that all lines should be ended with  a `\r\n` and old servers mainly still need this constraint to hold to parse properly.
+## Relearning to program in C
+<!-- ![https://i.imgur.com/Yd00GWf.gif](https://i.imgur.com/Yd00GWf.gif) -->
+
+The next big step was to implement this IRC conversation. However, my knowledge of C was quite lacking. Although I had programmed in C before, for example for both Operating Systems and Parallelization Compilers and Platforms, I was still having a hard time because the environment wasn't as constrained as before. Hence, I decided to also follow the C Programming homologation course provided by TU/e while doing this project. But even after all of that I was having trouble with the socket communication. Hence, I returned to the basics, "The C programming language" by Brain W. Kernighan and Dennis M. Rithchie. Additionally, my supervisor also let me borrow "Linux Programming het complete handboek" by John Goerzen which also helped me tremoundously. Then after some tips from my supervisor on the advanced usage of man pages and after shredding my OOP biases by watching a lecture on Return Oriented Programming (can't find it right now). Return Oriented Programming (... was especially helpful), I was finally getting the hang of it.
+
+## IRC sockets
+<!-- ![Explanation](https://i.redd.it/8asaqsoczcf41.jpg "TCP vs UDP") -->
+
+Now that I felt like I was back in the game, I could finally properly tackle the IRC socket communication in C. Eventually, after a good amount of reading and trial and error, I ended up with the following snippet:
+### Using C
+```c
+...
+```
+While working on the snippet I after found myself in a situation were the server would ignore my commands. After debugging, this generally seemed to happen because of one of two reasons. My stupid mistakes include but are not limited to:
+
+1. I didn't wait enough between sending commands. This can be resolved by adding a time delay after every `write(fd)`
+2. Commands were not properly parsed by the server. This could be resolved by explicitly adding a `\r\n` after each command.
+
+Additionally, I often was rejected by the server because the nickname was already register. This happens because after registering a nickname and then leaving the server it takes a while for the server to realize the user is gone if the user doesn't explicitly notify the server.
+
+<!--
+## Making my life easier
+- Struggling with C
+- Learning c through the tutorial
+- learning C through a course
+- Learning simple electronics
+-->
+## Parsing responses
+<!-- ![a2b](https://t3.ftcdn.net/jpg/05/18/40/02/360_F_518400262_icQMe9P8OvEhjF4U1SoB461AWoneUAtx.jpg "a2b") -->
+ 
+<!-- add hash map joma tech reference -->
+Now that I had a basic setup for the IRC client, I wanted to esnure that I could respond to relevant messages with appropriates messages. To do so, I decided to write a simple parser. Discussing this with my supervisor led me to consider a simple hashmap implementation where the first part of th string is checked to decide what command it is to then run the associated callback. Discussing this with a friend of mine, resulted in ideas about possibly implementing a perfect hashmap. However, I eventually decided to give up on this idea because the command arguments made it so that no perfect has map could be formed. As such, I eventually had to comprimise the parser to run in O(n) with n being the amount of implemented callback checks.
+
+## Adding proper interfaces
+<!-- ![Cat interface](https://i.redd.it/hbtksz4999c11.jpg "cat interface") -->
+
+Now that I had a parser, I needed response options. So I implemented all of the IRC commands mentioned above using an interface and made additional interfaces for the user and server session. This was harder than it seemed and required quite a lot of guidance. A big learning experience was the use of static inside of interface headers to allow you to not specify as much. Additionally, reading online post quickly learned me to reduce the use of pointers in embedded systems to make usage more predictable and reduce the possibility of a stack overflow. When I finished, I added a small callback for the required ping pong interaction.
+
+## Setting up the pipeline
+<!-- ![Pipeline](https://blog.fenstermaker.com/wp-content/uploads/2023/06/types-of-oil-and-gas-pipelines-1200x628.jpg "pipeline") -->
+
+To properly set up the pipeline, I needed to utilize a buildsystem to reduce the complexity of complilation and testing. As such, I started reading up on Makefiles in the provided book. Additionally, I worked through the tutorial provided by my supervisor in his course again. However, after all of that I was still struggling so I aided this effort with the tutorial on their website and some prompting of ChatGPT so set up an easier compilation system
+
+Now that was out of the way, I continued with practicing with cUnit. After following the tutorial, I simply adjusted the provided files to implement the test cases I required for all the callback options I wrote. After some trial and error this sufficed. 
+
+Then I uploaded all of this to the github and made sure to make a new actions to check if the compilation did not fail. 
+
+Finally, as will be covered later I learned a bit of CMakeList using their tutorial because it was required for the switch to the ESP32 as will be explained in the next section
+
+## Switching to the ESP32
+<!-- ![esp32](https://media.licdn.com/dms/image/v2/D4D22AQFKkSN7JTCcKQ/feedshare-shrink_800/feedshare-shrink_800/0/1724501838742?e=2147483647&v=beta&t=FrHo0g4h3g71UeVxtEaUZYPgSE0NEfXpUxJo93sdRfE "ESP32 vs AVR") -->
+
+Jingcai provided many examples. Most of which being Arduino examples. Running those Arduino examples worked well until I tried moving outside of the provided code. However, after learning more about the compilation and inclusion steps of Arduino compared to C I slowely started to make it work. However, I quickly stopped this venture when I realized that moving from the Arduino examples to the C examples wasn't as easy as I thought. Originally I expected to be able to re-use the same libraries in the C code directly by simply integrating by providing their paths to the compiler. However, a big difference between the GUI applications in Arduino and C was that the C one actually runs through the esp-idf compiler first. The esp-idf uses a totally different inclusion system then used normally with Makefiles or atleast that is how it appeared. Hence, I decided to switch to the provided C examples first. Sadly enough these did not work at all. The reason being that the esp compiler used by the manufacturer was version 3.\*.\* and the current compiler version is v5.\*. Additionally, it wasn't viable to simply downgrade to version 3.\*.\* because I required up to date wifi drivers. 
+
+This caused resulted in many incompatibility issues:
+- Build system issues
+- Configuration system issues
+- Code integration issues
+
+Thus, I first tried to find alternatives... Using the provided examples from the LVGL doc... Didn't work... Using the component system from the LVGL VS code extension... Ditn't work... Installing LVGL manually... Didn't work...
+
+The issue likely being that there was a mismatch between the software and required hardware I didn't know about. Additionally, the examples were written for LVGL 7 instead of LVGL 9. This also resulted in many incompatibility issues.
+
+Hence, I eventually decided to tried to look at the problem from a different angle... I decided to mix the general esp examples and jingcai examples to get a c project with lvgl working that showed the GUI from jingcai while using provided wifi features form esp idf.
+
+However, due to the aforementioned issues. This wasn't easy... I started with the sdkconfig. I concatenated the sdkconfigs from both project and then removed all of the duplicates. Next, I started moving all the inclusion paths from the component.mk and Makefiles  files to local CMakeList.txt files with help of ChatGPT. Then I added the missing components of the Jingcai example to the esp idf example. And also made them CMakeList files as explained before. Finally, I adjusted the toplevel CMakeList for the previous changes. Added an idf\_component.yml.
+
+After all of that it started compiling with less errors. However, mainy GUI driver errors remained. So I just started removing many unused ones until the errors stopped.
+
+Then after all of that. I first ran a hello world. And then the 5\_35\_LVGL\_FULL\_Test-S024 with the adjustments which didn't throw an error anymore. However, something was still wrong. The program booted but no image was shown on the screen. After some thinking, I tried holding my flash light under it and realized that that it was showing something in fact but that the backlight simply was not functioning properly. Hence, I checked the pin layout and then added a command to turn on the backlight which finally made the example function properly.
+
+## Making a GUI applicatoin
+<!-- ![Cat GUI](https://i.redd.it/7nu43ek0hlw51.jpg "Cat GUI") -->
+
+Now that the GUI was somewhat working. I first tried out the networking possibilities. This went quite well and didn't require too much configuration. Testing DNS lookups with some generated code was quite easy and confirmed that the modulation worked properly. Hence, I moved on to a reduced version of my earlier IRC client... This was a bit harder so I just used write and removed the poll due to unknown issues. This allowed me to connect to my server eventually. With the MOTD message as a confirmation I could now continue. 
+
+Moving to the whole client was even harder hto. I fisrst had a hard time adding the include dir to the new project as a result of the new build system with CMakeList instead of Make Files and component.mk. When I figured that out I still had problems with integrating the response loop. This was a result from stdin not working with esp idf. Instead of an error it just ignores the input. This was quite unexpected behaviour and that is why it took me quite long to fix this error. 
+AFter thtat i divided the process into connecting to wifi, making a user, and connecting to the server. Then I added memory save options especially for the user credentials.  Then I redid the layout. 
+
+## Fixing the orientation
+<!-- ![A Better Tomorrow](https://i.makeagif.com/media/5-15-2024/w8dynY.gif "Speech from A Better Tomorrow") -->
+Getting a GUI working properly already felt like a big step forward. However, using the GUI still was quite awkward. For any other project a horizontal display would probably suffice or would be even preferable but not for a project like this. Since, the IRC client kind-of mimicks messaging on a phone I decided that the GUI had to be vertical. Luckily, this should only be a small fix. Just change the right setting in the macro's to change the orientation. Quick, easy, simple right? Right?? Haha, more like SNAFU.
+### Denial
+As stated before, I based my project on a combination of the [examples/wifi/getting\_started/station](https://github.com/espressif/esp-idf/tree/master/examples/wifi/getting_started/station) project provided by the esp-idf v5.5.2 GitHub repository from espressif and the [2.8inch\_ESP32-2432S028R/1-Demo/Demo\_LVGL(idf-4.3)/5\_35\_LVGL\_Full\_Test-S024](https://www.tinytronics.nl/product_files/005637_2.8inch_ESP32-2432S028R-complete.zip) project provided by TinyTronics from Jingcai. This resulted in quite a big sdkconfig file and quite a lot of Kconfig files. In the resulting [menuconfig](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/kconfig/project-configuration-guide.html), there are 3 related options for my touchscreen controller (XPT2046):
+- Swap XY
+- Invert X coordinate value
+- Invert Y coordinate value
+
+and 4 related options for my display controller (ILI9341):
+
+- Portrait
+- Inverted Portrait
+- Landscape
+- Inverted Landscape
+
+Changing the options for the display controller from Landscape to Inverted Portrait quickly gave me the result I was looking for. However, irregardless of what combination of options I selected for the touchscreen controller, I just couldn't get it to align with the new oriententation. After trying all 2*2*2 = 8 combinations on 3 separate occasions, scrolling through more than 2300 lines of configuration options (in the sdkconfig), and looking for wrong initialization values in the code, I still couldn't make any progress.
+<!-- ![Ronaldo Milk](https://media.tenor.com/NF6ixwAmrTMAAAAM/cristiano-ronaldo-drinking.gif "Siuuuuuuuuuuu") -->
+### Anger
+Since none of the configuration options worked like they were supposed to, I decided to dig deeper. I searched the project for the touchscreen driver selected in the menuconfig i.e. the XPT2046 and eventually found `xpt2046.c` which implemented the required touchscreen interface of `touch_driver.h` in `components/lvgl_esp32_drivers/lvgl_touch). However, to my suprise the code was full of ▯. I put 1 and 1 together and realized that these [tofu blocks](https://simplelocalize.io/blog/posts/tofu-symbol/) likely represented Chinese since the manufacturer of the board, Jingcai, is based in China. Next to that, the driver was programmed absolutely horibly. Un used variables, useless if statments, unused functions, arbitrary solutions and variable naming conventions which of course was accompanied by literal chinese. Truly, peak production code. 
+
+<!-- [Skeleton on Fire](https://i.pinimg.com/originals/90/a6/f4/90a6f42dd08a868e0d8f94bd1a3a9b59.gif "A visual of my emontional state") -->
+
+### Bargaining
+FIDO. Not touching that. Maybe I just did something wrong while merging the sdkconfigs and they simply don't propegate the settings I chose to the compiler. What if I just change the values of the macro's which they are supposed to change... Huh weird... that doesn't seem to do anything... Mmm... It seems like the compiler also reloads the provided sdkconfig options for every compilation. Great.
+
+<!-- ![Nu uh](https://i.ytimg.com/vi/UFjjtYRVtmk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBlXl8SK_kt3jtIfNW0HxKrCOYhag "Nu uh man") -->
+### Depression
+I really didn't want to do this but it was time to translate the Chinese and understand the driver code... I still can't seem to fix it.
+
+<!-- ![Incredible](https://static.wikia.nocookie.net/the-uncanny-incredible/images/5/50/Phase_5.png/revision/latest/scale-to-width/360?cb=20240730175349 "Incredible") -->
+### Acceptance
+I guess I'm going to read the specification of the driver. Learn how SPI and TFT works. And after all of that I realized, the order of adjustment simply was off.
+
+<!-- ![Cooked dog](https://i.redd.it/cooked-dog-v0-clswoeuhyjhf1.jpg?width=1170&format=pjpg&auto=webp&s=49b7bed8adcc19584e282ef1bbebee46d2eb549b "Cooked Dog") -->
+
+<!--
+  would turn-out  since I mostly programmed my GUI using relative scaling and there was an in-build macro.  but for this project I imagined by endproduct somewhat as a phone. SO 
+- Researching the craft
+After building the GUI, I wanted to make the project a bit easier to use. Currently, with the my ESP in portrait mode it was quite hard to type in credentials or server addresses. Normally, the recalculations or switching to a different orientation can be quite hard since the screen, touchscreen and graphics drivers all would need to be adjusted.
+-->
+## Putting it all together
+As of writing this report, I'm still working on the following parts for the final end product which I will be presenting during the presentation:
+- Processing feedback
+- Refactoring (the hash map and o.g. code combo)
+- Making a server that is remotely available
+- Printing cases
+- Testing the product
+
+## Wrap-up
+The journey was quite long and although I lost my way a couple of times, all in all it was very fun. The way in which I presented this journey above is not enitrely correct. Many times, I had to take many steps back to go one step forward. That is to say, my process not even close to the linear story I presented here above. Irregardless of the non-linearity of my progress, all in all, it was very fun and it feels like I have at least somewhat achieved my goals. I feel like this project forced me to become a **better embedded systems engineer**.
+
+<!-- ![It's over now](https://s1.qwant.com/thumbr/474x267/a/e/56a5e9cc5848b3d1d6f430a744511a019dffbf31fe5f5b3235039d368dcf39/OIP.WPeRAkm4_hIT27MWebEuqgHaEL.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.WPeRAkm4_hIT27MWebEuqgHaEL%3Fpid%3DApi&q=0&b=1&p=0&a=0) -->
+
+Still, I think that this project was only the start. I have many things I still want to improve and add to this project such as messaging over BlueTooth and LoRa, or turning the ESP32 into a portable IRC server, and many other things.
+
+Nevertheless, for now, I want to thank my Professional supervisor for all the advice and positivity even when I kept swearing about package incompatibility and [not being a real programmer](https://homepages.inf.ed.ac.uk/rni/papers/realprg.html). I also want to thank my Personal Leadership supervisor Esmee van der Ham for mentally preoparing me for the journey. Finally, I want to thank the reader for bearing with me until the end.
