@@ -1,6 +1,6 @@
 +++
 date = '2026-03-16T10:56:48+01:00'
-draft = false 
+draft = true 
 title = 'Draft: Honoring the IRC Protocol and C-ing it through'
 toc = true
 +++
