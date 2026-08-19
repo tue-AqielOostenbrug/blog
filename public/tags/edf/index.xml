@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Edf on Terminal</title>
+		<link>//localhost:1313/tags/edf/</link>
+		<description>Recent content in Edf on Terminal</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 19 Aug 2026 07:36:49 +0200</lastBuildDate>
+		
+			<atom:link href="//localhost:1313/tags/edf/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>T_2</title>
+				<link>//localhost:1313/posts/t_2/</link>
+				<pubDate>Wed, 19 Aug 2026 07:36:49 +0200</pubDate>
+				<guid>//localhost:1313/posts/t_2/</guid>
+				<description>&lt;p&gt;This is a start on the soft CBS + EDF examples (&lt;a href=&#34;//localhost:1313/pdf/soft_pres_skeleton.pdf&#34;&gt;here&lt;/a&gt;.)&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Thesis #1</title>
+				<link>//localhost:1313/posts/t_1/</link>
+				<pubDate>Tue, 18 Aug 2026 18:31:55 +0200</pubDate>
+				<guid>//localhost:1313/posts/t_1/</guid>
+				<description>&lt;p&gt;For my thesis, I will be working on improving the dynamic real-time scheduler in Linux. For consistent updates please read the follow up posts.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

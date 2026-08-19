@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Draft: Honoring the IRC Protocol v2 :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&hellip; a Honors project.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/v2/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a0773cce9310cb6d8ed23e50f005448facf29a53001b57e038828daa466b25c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://tue-aqieloostenbrug.github.io/" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Draft: Honoring the IRC Protocol v2">
+<meta property="og:description" content="At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&hellip; a Honors project.
+" />
+<meta property="og:url" content="//localhost:1313/posts/v2/" />
+<meta property="og:site_name" content="Terminal" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2026-03-19 08:56:48 &#43;0100 CET" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/blog/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/showcase" >Showcase</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/v2/">Draft: Honoring the IRC Protocol v2</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2026-03-19</time></div>
+
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#defining-the-project">Defining the Project</a></li>
+    <li><a href="#setting-up-the-server">Setting up the server</a></li>
+    <li><a href="#testing-the-protocol">Testing the protocol</a>
+      <ul>
+        <li><a href="#learning-commands">Learning commands</a></li>
+        <li><a href="#testing-commands">Testing commands</a></li>
+      </ul>
+    </li>
+    <li><a href="#relearning-to-program-in-c">Relearning to program in C</a></li>
+    <li><a href="#irc-sockets">IRC sockets</a>
+      <ul>
+        <li><a href="#using-c">Using C</a></li>
+      </ul>
+    </li>
+    <li><a href="#parsing-responses">Parsing responses</a></li>
+    <li><a href="#adding-proper-interfaces">Adding proper interfaces</a></li>
+    <li><a href="#setting-up-the-pipeline">Setting up the pipeline</a></li>
+    <li><a href="#switching-to-the-esp32">Switching to the ESP32</a></li>
+    <li><a href="#making-a-gui-applicatoin">Making a GUI applicatoin</a></li>
+    <li><a href="#fixing-the-orientation">Fixing the orientation</a>
+      <ul>
+        <li><a href="#denial">Denial</a></li>
+        <li><a href="#anger">Anger</a></li>
+        <li><a href="#bargaining">Bargaining</a></li>
+        <li><a href="#depression">Depression</a></li>
+        <li><a href="#acceptance">Acceptance</a></li>
+      </ul>
+    </li>
+    <li><a href="#putting-it-all-together">Putting it all together</a></li>
+    <li><a href="#wrap-up">Wrap-up</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>At the start of my master degree I decided that I wanted to do something new. The Computer Science and Engineering bachelor was fun but felt a bit unpractical. Although I learned more about how computers work and how to make great programs, at the end of the day it still felt like magic and like Gandalf I also wanted to be able to write my spells from the ground up. So I did the rational thing, and choose Embedded Systems. But the more courses I followed, the greater the gap between the hardware and software felt. So I decided to do a somewhat irrational thing&hellip; a Honors project.</p>
+<h2 id="defining-the-project">Defining the Project<a href="#defining-the-project" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To become a proper wizard, I simply felt like I mostly needed more practical experience. No more curriculum, no more constraints, just pure experience. To become a better embedded systems engineer, I decided to get as close to the problem as possible. So I decided to really, really, learn how to program an embeded system in C. Some of the courses I followed already got pretty close to my problem and even increased my curiosity further. The closest of which was Parallelization, compilers and platforms by Roel Jordans. So I asked for his supervision, which he luckily agreed with. Now I just needed a concrete-ish plan. After a lot of brainstorming and some small adjustments here and there, I eventually settled on the following learning objectives <strong>become a better embedded engineer</strong>:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Become advanced C programmer</li>
+<li><input checked="" disabled="" type="checkbox"> Produce a complete embedded system, so I apply my knew knowledge to industry (design, build, test and document the system)</li>
+<li><input checked="" disabled="" type="checkbox"> Stay organized (<strong>not covered in this post</strong>)</li>
+<li><input disabled="" type="checkbox"> <del>fly to Mount Doom</del></li>
+<li><input disabled="" type="checkbox"> <del>Destroy the One Ring</del></li>
+</ul>
+<p>The first project many developers undertake when learning a new language is to write a HTTP server. However, I had different plans&hellip; During my bachelor in Computer Science and Engineering there was course called <a href="https://research.tue.nl/en/courses/computer-networks-and-security-3/">Computer Networks and Security</a> given by Tanir Ozcelebi. While writing a paper on the <a href="https://en.wikipedia.org/wiki/QUIC">QUIC protocol</a>, I stumbled across an old chat protocol. A little something called <a href="https://nl.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> (Internet Relay Chat). As a gen-z zoomer IRC felt like magic from a long forgotten era that I definitely needed to learn someday and today was that day. So for my first objective I decided to tackle IRC.</p>
+<p>Following this line of thought, for the second objective, I decided to go through the entire development pipeline to write a client for IRC. My plan being to first develop a client for Linux and then port my client onto an embedded system.</p>
+<p>That being said deciding on an embedded system was not easy. First started by looking at the constraints: the smallest IRC client I found was <a href="https://tools.suckless.org/sic/">sic</a> from the suckless stack. Written in less than 250 lines of C code, sic is only 5KB. Given an <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf">Atmega328P</a> reportedly has 32KB of flashmemory, it should even be possible to write an IRC client for an Arduino Uno. However, I also wanted to add some kind of input like buttons and a screen. Morover, for the IRC protocal it defintely needed some form of modulation to reach the server and to be useful it needs to become some form of a standalone device. Due to all of these constraints, it would have been hard to complete this project with an Arduino. Hence, I reached out to my supervisor for advice and after thinking it through I decided to work with an ESP32 instead because of the WiFi and Bluetooth capabilities and its popularity in industry. Moreso, after so searching online, I quickly found a ESP32 with a touchscreen which sounded like an interesting addition to this project because of the input and actuation affiliated with the touchscreen. Thusly, I eventually decided to use the <a href="https://www.tinytronics.nl/nl/development-boards/microcontroller-boards/met-wi-fi/jingcai-esp32-2432s028r-2.8-inch-tft-lcd-display-320*240-pixels-met-resistief-touchscreen-esp32">ESP32-2432S028R</a> which was also partly inspired by the <a href="https://github.com/justcallmekoko/ESP32Marauder">ESP32 Marauder project</a> by <a href="https://github.com/justcallmekoko">justcallmekoko</a>.</p>
+<h2 id="setting-up-the-server">Setting up the server<a href="#setting-up-the-server" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To develop a client for the IRC protocol it was necessary to deploy a IRC server. For IRC servers the most popular options are <a href="https://www.unrealircd.org/">UnrealIRCd</a> and <a href="https://www.inspircd.org/">InspIRCd</a>. I tried running both but the first one I eventually ended up getting to work is the UnrealIRCd server. Still, I must say this wasn&rsquo;t as easy as I was expecting. Following the tutorial on their website was quite doable expect for changing the config file. However, using this Youtube video I eventually managed to set it up properly.</p>
+<p>Given the setup experience wasn&rsquo;t that nice for me. I decided to make a dDocker file that could set i up for future development of my tools. This resulted in <a href="...">Dockerfile</a> which I ended up writing with support of ChatGPT and the Docker docuemntation to get the sed part working correctly and use the correct terms for the install section so you don&rsquo;t have to rebuild all the required packages when rebulding the server.</p>
+<p>Still, some notable issues with the server are that when logging off, the used nickname will stay unusable for longer than expected. As such, logging off and on requires the user to wait or use a different nickname.</p>
+<h2 id="testing-the-protocol">Testing the protocol<a href="#testing-the-protocol" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To develop a client for the IRC protocol, I first tried to familiarize myself with the general process and most important commands.</p>
+<h3 id="learning-commands">Learning commands<a href="#learning-commands" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>IRC actually has hundreds of commands and parameter pecularities (see <a href="ircdocs.horse">ircdocs.horse</a>). Luckily, for my simple client, there were only three stages that I felt I needed to concern myself with: Authentication, channel navigation, and communication.</p>
+<p>For authentication, I decided to use the following commands to login:</p>
+<ul>
+<li><code>PASS &lt;password&gt;</code>: Submits your password to the server</li>
+<li><code>NICK &lt;nickname&gt;</code>: Submits your nickname to the server</li>
+<li><code>USER &lt;username&gt; 0 * :&lt;realname&gt;</code>: Submits your username and realname to the server</li>
+</ul>
+<p>It is important that this stage happens first after connecting to the server. If not, the client will not be serviced and won&rsquo;t even be allowed to authenticat if the time-out is reached. Note that password is not always essential as many servers allow clients to connect without full authentication.</p>
+<p>For navigation, I decided to restrict myself to the following three commands:</p>
+<ul>
+<li><code>JOIN &lt;channel&gt;</code>: this allows you to join a channel (kind of like a groupchat with a specific name in the server)</li>
+<li><code>LIST</code>: show you a list of all available channels on the server</li>
+<li><code>PART &lt;channel&gt;</code>: removes you from the specified channel</li>
+</ul>
+<p>Then finally, for communication, I only focussed on one command:</p>
+<ul>
+<li><code>PRIVMSG &lt;target&gt; &lt;msg&gt;</code>: Sends a msg to the target ( channel or nickname) you specified.</li>
+</ul>
+<h3 id="testing-commands">Testing commands<a href="#testing-commands" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>Now that I learned some important IRC commands, I needed to test them. The easiest way to experience the IRC protocol without a full client is to connect to an IRC server using <code>telnet</code> or <code>netcat</code>.</p>
+<p>On Arch you can install <code>telnet</code> by running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -Sy inetutils
+</span></span></code></pre></div><p>Then you can connect to the server using:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">telnet &lt;server address&gt; &lt;port&gt;
+</span></span></code></pre></div><p>Then you can simply write the commands in the terminal and press enter to send the commands to the server.
+However, please note that <code>telnet</code> is not practical to use for real IRC communication because it does not support TLS encryption. This allows malicious actors to read and  modify the content of any message that you or the server send if they can manage to position themselves between the client and the server.</p>
+<p>Alternatively, you can use netcat. Installing <code>netcat</code> on Arch goes as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -Sy openbsd-netcat
+</span></span></code></pre></div><p><strong>Please note that the <code>openbsd-netcat</code> package has been flagged as out of date as of 08-03-2026.</strong>
+Connecting to the server using <code>netcat</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc &lt;server address&gt; &lt;port&gt;
+</span></span></code></pre></div><p>You need to watch out since netcat only sends <code>\n</code> by default. As such, you need to add <code>\r</code> for some servers to function properly because the IRC protocol specifies that all lines should be ended with  a <code>\r\n</code> and old servers mainly still need this constraint to hold to parse properly.</p>
+<h2 id="relearning-to-program-in-c">Relearning to program in C<a href="#relearning-to-program-in-c" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The next big step was to implement this IRC conversation. However, my knowledge of C was quite lacking. Although I had programmed in C before, for example for both Operating Systems and Parallelization Compilers and Platforms, I was still having a hard time because the environment wasn&rsquo;t as constrained as before. Hence, I decided to also follow the C Programming homologation course provided by TU/e while doing this project. But even after all of that I was having trouble with the socket communication. Hence, I returned to the basics, &ldquo;The C programming language&rdquo; by Brain W. Kernighan and Dennis M. Rithchie. Additionally, my supervisor also let me borrow &ldquo;Linux Programming het complete handboek&rdquo; by John Goerzen which also helped me tremoundously. Then after some tips from my supervisor on the advanced usage of man pages and after shredding my OOP biases by watching a lecture on Return Oriented Programming (can&rsquo;t find it right now). Return Oriented Programming (&hellip; was especially helpful), I was finally getting the hang of it.</p>
+<h2 id="irc-sockets">IRC sockets<a href="#irc-sockets" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Now that I felt like I was back in the game, I could finally properly tackle the IRC socket communication in C. Eventually, after a good amount of reading and trial and error, I ended up with the following snippet:</p>
+<h3 id="using-c">Using C<a href="#using-c" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">...</span>
+</span></span></code></pre></div><p>While working on the snippet I after found myself in a situation were the server would ignore my commands. After debugging, this generally seemed to happen because of one of two reasons. My stupid mistakes include but are not limited to:</p>
+<ol>
+<li>I didn&rsquo;t wait enough between sending commands. This can be resolved by adding a time delay after every <code>write(fd)</code></li>
+<li>Commands were not properly parsed by the server. This could be resolved by explicitly adding a <code>\r\n</code> after each command.</li>
+</ol>
+<p>Additionally, I often was rejected by the server because the nickname was already register. This happens because after registering a nickname and then leaving the server it takes a while for the server to realize the user is gone if the user doesn&rsquo;t explicitly notify the server.</p>
+<h2 id="parsing-responses">Parsing responses<a href="#parsing-responses" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Now that I had a basic setup for the IRC client, I wanted to esnure that I could respond to relevant messages with appropriates messages. To do so, I decided to write a simple parser. Discussing this with my supervisor led me to consider a simple hashmap implementation where the first part of th string is checked to decide what command it is to then run the associated callback. Discussing this with a friend of mine, resulted in ideas about possibly implementing a perfect hashmap. However, I eventually decided to give up on this idea because the command arguments made it so that no perfect has map could be formed. As such, I eventually had to comprimise the parser to run in O(n) with n being the amount of implemented callback checks.</p>
+<h2 id="adding-proper-interfaces">Adding proper interfaces<a href="#adding-proper-interfaces" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Now that I had a parser, I needed response options. So I implemented all of the IRC commands mentioned above using an interface and made additional interfaces for the user and server session. This was harder than it seemed and required quite a lot of guidance. A big learning experience was the use of static inside of interface headers to allow you to not specify as much. Additionally, reading online post quickly learned me to reduce the use of pointers in embedded systems to make usage more predictable and reduce the possibility of a stack overflow. When I finished, I added a small callback for the required ping pong interaction.</p>
+<h2 id="setting-up-the-pipeline">Setting up the pipeline<a href="#setting-up-the-pipeline" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>To properly set up the pipeline, I needed to utilize a buildsystem to reduce the complexity of complilation and testing. As such, I started reading up on Makefiles in the provided book. Additionally, I worked through the tutorial provided by my supervisor in his course again. However, after all of that I was still struggling so I aided this effort with the tutorial on their website and some prompting of ChatGPT so set up an easier compilation system</p>
+<p>Now that was out of the way, I continued with practicing with cUnit. After following the tutorial, I simply adjusted the provided files to implement the test cases I required for all the callback options I wrote. After some trial and error this sufficed.</p>
+<p>Then I uploaded all of this to the github and made sure to make a new actions to check if the compilation did not fail.</p>
+<p>Finally, as will be covered later I learned a bit of CMakeList using their tutorial because it was required for the switch to the ESP32 as will be explained in the next section</p>
+<h2 id="switching-to-the-esp32">Switching to the ESP32<a href="#switching-to-the-esp32" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Jingcai provided many examples. Most of which being Arduino examples. Running those Arduino examples worked well until I tried moving outside of the provided code. However, after learning more about the compilation and inclusion steps of Arduino compared to C I slowely started to make it work. However, I quickly stopped this venture when I realized that moving from the Arduino examples to the C examples wasn&rsquo;t as easy as I thought. Originally I expected to be able to re-use the same libraries in the C code directly by simply integrating by providing their paths to the compiler. However, a big difference between the GUI applications in Arduino and C was that the C one actually runs through the esp-idf compiler first. The esp-idf uses a totally different inclusion system then used normally with Makefiles or atleast that is how it appeared. Hence, I decided to switch to the provided C examples first. Sadly enough these did not work at all. The reason being that the esp compiler used by the manufacturer was version 3.*.* and the current compiler version is v5.*. Additionally, it wasn&rsquo;t viable to simply downgrade to version 3.*.* because I required up to date wifi drivers.</p>
+<p>This caused resulted in many incompatibility issues:</p>
+<ul>
+<li>Build system issues</li>
+<li>Configuration system issues</li>
+<li>Code integration issues</li>
+</ul>
+<p>Thus, I first tried to find alternatives&hellip; Using the provided examples from the LVGL doc&hellip; Didn&rsquo;t work&hellip; Using the component system from the LVGL VS code extension&hellip; Ditn&rsquo;t work&hellip; Installing LVGL manually&hellip; Didn&rsquo;t work&hellip;</p>
+<p>The issue likely being that there was a mismatch between the software and required hardware I didn&rsquo;t know about. Additionally, the examples were written for LVGL 7 instead of LVGL 9. This also resulted in many incompatibility issues.</p>
+<p>Hence, I eventually decided to tried to look at the problem from a different angle&hellip; I decided to mix the general esp examples and jingcai examples to get a c project with lvgl working that showed the GUI from jingcai while using provided wifi features form esp idf.</p>
+<p>However, due to the aforementioned issues. This wasn&rsquo;t easy&hellip; I started with the sdkconfig. I concatenated the sdkconfigs from both project and then removed all of the duplicates. Next, I started moving all the inclusion paths from the component.mk and Makefiles  files to local CMakeList.txt files with help of ChatGPT. Then I added the missing components of the Jingcai example to the esp idf example. And also made them CMakeList files as explained before. Finally, I adjusted the toplevel CMakeList for the previous changes. Added an idf_component.yml.</p>
+<p>After all of that it started compiling with less errors. However, mainy GUI driver errors remained. So I just started removing many unused ones until the errors stopped.</p>
+<p>Then after all of that. I first ran a hello world. And then the 5_35_LVGL_FULL_Test-S024 with the adjustments which didn&rsquo;t throw an error anymore. However, something was still wrong. The program booted but no image was shown on the screen. After some thinking, I tried holding my flash light under it and realized that that it was showing something in fact but that the backlight simply was not functioning properly. Hence, I checked the pin layout and then added a command to turn on the backlight which finally made the example function properly.</p>
+<h2 id="making-a-gui-applicatoin">Making a GUI applicatoin<a href="#making-a-gui-applicatoin" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Now that the GUI was somewhat working. I first tried out the networking possibilities. This went quite well and didn&rsquo;t require too much configuration. Testing DNS lookups with some generated code was quite easy and confirmed that the modulation worked properly. Hence, I moved on to a reduced version of my earlier IRC client&hellip; This was a bit harder so I just used write and removed the poll due to unknown issues. This allowed me to connect to my server eventually. With the MOTD message as a confirmation I could now continue.</p>
+<p>Moving to the whole client was even harder hto. I fisrst had a hard time adding the include dir to the new project as a result of the new build system with CMakeList instead of Make Files and component.mk. When I figured that out I still had problems with integrating the response loop. This was a result from stdin not working with esp idf. Instead of an error it just ignores the input. This was quite unexpected behaviour and that is why it took me quite long to fix this error.
+AFter thtat i divided the process into connecting to wifi, making a user, and connecting to the server. Then I added memory save options especially for the user credentials.  Then I redid the layout.</p>
+<h2 id="fixing-the-orientation">Fixing the orientation<a href="#fixing-the-orientation" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Getting a GUI working properly already felt like a big step forward. However, using the GUI still was quite awkward. For any other project a horizontal display would probably suffice or would be even preferable but not for a project like this. Since, the IRC client kind-of mimicks messaging on a phone I decided that the GUI had to be vertical. Luckily, this should only be a small fix. Just change the right setting in the macro&rsquo;s to change the orientation. Quick, easy, simple right? Right?? Haha, more like SNAFU.</p>
+<h3 id="denial">Denial<a href="#denial" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>As stated before, I based my project on a combination of the <a href="https://github.com/espressif/esp-idf/tree/master/examples/wifi/getting_started/station">examples/wifi/getting_started/station</a> project provided by the esp-idf v5.5.2 GitHub repository from espressif and the <a href="https://www.tinytronics.nl/product_files/005637_2.8inch_ESP32-2432S028R-complete.zip">2.8inch_ESP32-2432S028R/1-Demo/Demo_LVGL(idf-4.3)/5_35_LVGL_Full_Test-S024</a> project provided by TinyTronics from Jingcai. This resulted in quite a big sdkconfig file and quite a lot of Kconfig files. In the resulting <a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/kconfig/project-configuration-guide.html">menuconfig</a>, there are 3 related options for my touchscreen controller (XPT2046):</p>
+<ul>
+<li>Swap XY</li>
+<li>Invert X coordinate value</li>
+<li>Invert Y coordinate value</li>
+</ul>
+<p>and 4 related options for my display controller (ILI9341):</p>
+<ul>
+<li>Portrait</li>
+<li>Inverted Portrait</li>
+<li>Landscape</li>
+<li>Inverted Landscape</li>
+</ul>
+<p>Changing the options for the display controller from Landscape to Inverted Portrait quickly gave me the result I was looking for. However, irregardless of what combination of options I selected for the touchscreen controller, I just couldn&rsquo;t get it to align with the new oriententation. After trying all 2<em>2</em>2 = 8 combinations on 3 separate occasions, scrolling through more than 2300 lines of configuration options (in the sdkconfig), and looking for wrong initialization values in the code, I still couldn&rsquo;t make any progress.</p>
+<h3 id="anger">Anger<a href="#anger" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>Since none of the configuration options worked like they were supposed to, I decided to dig deeper. I searched the project for the touchscreen driver selected in the menuconfig i.e. the XPT2046 and eventually found <code>xpt2046.c</code> which implemented the required touchscreen interface of <code>touch_driver.h</code> in `components/lvgl_esp32_drivers/lvgl_touch). However, to my suprise the comments in the code contained quite some ▯. I put 1 and 1 together and realized that these <a href="https://simplelocalize.io/blog/posts/tofu-symbol/">tofu blocks</a> likely represented Chinese since the manufacturer of the board, Jingcai, is based in China. Next to that, the driver was programmed absolutely horibly. Un used variables, useless if statments, unused functions, arbitrary solutions and variable naming conventions which of course was accompanied by literal chinese. Truly, peak production code.</p>
+<h3 id="bargaining">Bargaining<a href="#bargaining" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>FIDO. Not touching that. Maybe I just did something wrong while merging the sdkconfigs and they simply don&rsquo;t propegate the settings I chose to the compiler. What if I just change the values of the macro&rsquo;s which they are supposed to change&hellip; Huh weird&hellip; that doesn&rsquo;t seem to do anything&hellip; Mmm&hellip; It seems like the compiler also reloads the provided sdkconfig options for every compilation. Great.</p>
+<h3 id="depression">Depression<a href="#depression" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>Although I really didn&rsquo;t want to into the touchscreen driver. I didn&rsquo;t really have a choice anymore. So I opened the driver and first started analyzing every global variable and then every function, while making sure to translate all Chinese commments I encountered on the way.  After analyzing the driver on a high level, I located the function that returns the touch coordinates (<strong>NOT HOW I REMEMBER THIS, I think the files have changed as well!!!</strong>) <strong>THE ISSUE MIGHT HAVE OCCURED BECAUSE OF THE MANUAL INTEGRATION I DID  BECAUSE THE FUNCTION WAS UNUSED</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Get the current position and state of the touchpad
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param data store the read data here
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @return false: because no more data to be read
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">xpt2046_read</span><span class="p">(</span><span class="kt">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="kt">lv_indev_data_t</span> <span class="o">*</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int16_t</span> <span class="n">last_x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">last_y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">valid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int16_t</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint16_t</span> <span class="n">ux</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">uy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint8_t</span> <span class="n">irq</span> <span class="o">=</span> <span class="nf">gpio_get_level</span><span class="p">(</span><span class="n">XPT2046_IRQ</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">irq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">uint8_t</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="nf">TP_Read_XY2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ux</span><span class="p">,</span><span class="o">&amp;</span><span class="n">uy</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="s">&#34;XPT2046 Read Coordinate Value x:%d   y:%d&#34;</span><span class="p">,</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="n">ux</span> <span class="o">&gt;</span> <span class="mi">350</span><span class="p">){</span><span class="n">ux</span> <span class="o">-=</span> <span class="mi">350</span><span class="p">;}</span><span class="k">else</span><span class="p">{</span><span class="n">ux</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="n">uy</span> <span class="o">&gt;</span> <span class="mi">190</span><span class="p">){</span><span class="n">uy</span> <span class="o">-=</span> <span class="mi">190</span><span class="p">;}</span><span class="k">else</span><span class="p">{</span><span class="n">uy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">			<span class="n">ux</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)((</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">ux</span> <span class="o">*</span> <span class="n">LV_HOR_RES</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3870</span> <span class="o">-</span> <span class="mi">350</span><span class="p">);</span><span class="c1">//320   3870-350
+</span></span></span><span class="line"><span class="cl">			<span class="n">uy</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)((</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">uy</span> <span class="o">*</span> <span class="n">LV_VER_RES</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3870</span> <span class="o">-</span> <span class="mi">190</span><span class="p">);</span><span class="c1">// 240  3870-190
+</span></span></span><span class="line"><span class="cl">			<span class="c1">// Flip cooordinates
+</span></span></span><span class="line"><span class="cl">			<span class="c1">//ux =  LV_HOR_RES - ux;
+</span></span></span><span class="line"><span class="cl">			<span class="n">ux</span><span class="o">=</span><span class="n">ux</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//uy =  LV_VER_RES - uy;
+</span></span></span><span class="line"><span class="cl">			<span class="nf">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="s">&#34;XPT2046 Read Coordinate Value x:%d   y:%d&#34;</span><span class="p">,</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">x</span> <span class="o">=</span> <span class="n">ux</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">y</span> <span class="o">=</span> <span class="n">uy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">last_x</span> <span class="o">=</span> <span class="n">ux</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">last_y</span> <span class="o">=</span> <span class="n">uy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="s">&#34;XPT2046 Read Error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">x</span> <span class="o">=</span> <span class="n">last_x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">y</span> <span class="o">=</span> <span class="n">last_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">avg_last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">valid</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">x</span> <span class="o">=</span> <span class="n">last_x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">y</span> <span class="o">=</span> <span class="n">last_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">avg_last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">valid</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">valid</span> <span class="o">==</span> <span class="nb">false</span> <span class="o">?</span> <span class="nl">LV_INDEV_STATE_REL</span> <span class="p">:</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>So I tried all combinations of the commented out lines. When this didn&rsquo;t result in a change of orientation, I removed the who lines for flipping x and y and then replaced the flip coordinates function with the unused xpt2046_corr(x,y) function??? Even after all of that I could not get it to work.</p>
+<h3 id="acceptance">Acceptance<a href="#acceptance" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>I guess I&rsquo;m going to read the specification of the driver. Learn how SPI and TFT works. And after all of that I realized, the order of adjustment simply was off.</p>
+<h2 id="putting-it-all-together">Putting it all together<a href="#putting-it-all-together" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>As of writing this report, I&rsquo;m still working on the following parts for the final end product which I will be presenting during the presentation:</p>
+<ul>
+<li>Processing feedback</li>
+<li>Refactoring (the hash map and o.g. code combo)</li>
+<li>Making a server that is remotely available</li>
+<li>Printing cases</li>
+<li>Testing the product</li>
+</ul>
+<h2 id="wrap-up">Wrap-up<a href="#wrap-up" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The journey was quite long and although I lost my way a couple of times, all in all it was very fun. The way in which I presented this journey above is not enitrely correct. Many times, I had to take many steps back to go one step forward. That is to say, my process not even close to the linear story I presented here above. Irregardless of the non-linearity of my progress, all in all, it was very fun and it feels like I have at least somewhat achieved my goals. I feel like this project forced me to become a <strong>better embedded systems engineer</strong>.</p>
+<p>Still, I think that this project was only the start. I have many things I still want to improve and add to this project such as messaging over BlueTooth and LoRa, or turning the ESP32 into a portable IRC server, and many other things.</p>
+<p>Nevertheless, for now, I want to thank my Professional supervisor for all the advice and positivity even when I kept swearing about package incompatibility and <a href="https://homepages.inf.ed.ac.uk/rni/papers/realprg.html">not being a real programmer</a>. I also want to thank my Personal Leadership supervisor Esmee van der Ham for mentally preoparing me for the journey. Finally, I want to thank the reader for bearing with me until the end.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/v3/" class="button inline prev">
+        &lt; [<span class="button__text">Honoring the IRC Protocol</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/honors/" class="button inline next">
+         [<span class="button__text">Draft: Honoring the IRC Protocol and C-ing it through</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
