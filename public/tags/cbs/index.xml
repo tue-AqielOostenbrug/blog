@@ -10,11 +10,25 @@
 		
 		
 		
-			<lastBuildDate>Wed, 19 Aug 2026 07:36:49 +0200</lastBuildDate>
+			<lastBuildDate>Fri, 21 Aug 2026 23:43:33 +0200</lastBuildDate>
 		
 			<atom:link href="//localhost:1313/tags/cbs/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>T_2</title>
+				<title>Thesis #4</title>
+				<link>//localhost:1313/posts/t_4/</link>
+				<pubDate>Fri, 21 Aug 2026 23:43:33 +0200</pubDate>
+				<guid>//localhost:1313/posts/t_4/</guid>
+				<description>&lt;p&gt;(&lt;a href=&#34;//localhost:1313/pdf/soft_ex_pending.pdf&#34;&gt;here&lt;/a&gt; is a small example I created yesteday and finished just now about pending jobs. Nevertheless, I&amp;rsquo;m not entirely sure whether its fully correct.&lt;/p&gt;&#xA;&lt;p&gt;This is because I am unsure whether it is correct to approach 0 budget in this model representation, and, more importantly, what the exact tiebreaker is for two tasks that arrive at the server a the same time. Even when I extend this notion to SCHED_DEADLINE, I am still unsure what the exact tiebreak should entail. In a future post, I hope to address these two questions.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Thesis #3</title>
+				<link>//localhost:1313/posts/t_3/</link>
+				<pubDate>Thu, 20 Aug 2026 11:26:40 +0200</pubDate>
+				<guid>//localhost:1313/posts/t_3/</guid>
+				<description>&lt;p&gt;Just a small example of yesterday (&lt;a href=&#34;//localhost:1313/pdf/soft_ex_start_job.pdf&#34;&gt;here&lt;/a&gt;.)&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Thesis #2</title>
 				<link>//localhost:1313/posts/t_2/</link>
 				<pubDate>Wed, 19 Aug 2026 07:36:49 +0200</pubDate>
 				<guid>//localhost:1313/posts/t_2/</guid>
